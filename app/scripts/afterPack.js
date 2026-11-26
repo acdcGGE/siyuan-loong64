@@ -6,7 +6,10 @@ const unzipper = require("unzipper");
 
 module.exports = async function afterPack(context) {
   const {appOutDir, arch, electronPlatformName, packager} = context;
-  await extractPackagedPandoc(appOutDir, packager, electronPlatformName, arch);
+  // loong64 上没有可用的 pandoc 预编译包，跳过解包
+  if (!process.env.LOONG64_SKIP_PANDOC) {
+    await extractPackagedPandoc(appOutDir, packager, electronPlatformName, arch);
+  }
   if (electronPlatformName === "darwin") {
     await require("./quicklook").compileQuickLook(path.join(appOutDir, `${packager.appInfo.productFilename}.app`), packager.appInfo.version);
   }

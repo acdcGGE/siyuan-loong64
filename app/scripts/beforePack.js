@@ -16,6 +16,10 @@ function prepareArguments(context) {
 }
 
 module.exports = async function beforePack(context) {
+    // loong64 交叉编译时没有可用的 OCR 运行时，跳过 OCR 资源准备
+    if (process.env.LOONG64_SKIP_OCR) {
+        return;
+    }
     const args = prepareArguments(context);
     await new Promise((resolve, reject) => {
         const child = spawn(process.platform === "win32" ? "python" : "python3", args, {stdio: "inherit"});

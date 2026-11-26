@@ -256,3 +256,5 @@ replace github.com/pdfcpu/pdfcpu => github.com/88250/pdfcpu v0.3.14-0.2025042412
 //replace github.com/88250/epub => D:\88250\epub
 //replace github.com/siyuan-note/logging => D:\88250\logging
 //replace github.com/siyuan-note/eventbus => D:\88250\eventbus
+
+replace github.com/go-ole/go-ole => ../third_party/go-ole
