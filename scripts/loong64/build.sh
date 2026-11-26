@@ -1,16 +1,14 @@
 #!/usr/bin/env bash
-# 交叉编译 SiYuan LoongArch64 桌面版（内核 + 前端 + electron-builder 目录）
+# 在 LoongArch64 上原生编译 SiYuan 桌面版（内核 + 前端 + electron-builder 目录）
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 
-: "${CC:=loongarch64-linux-gnu-gcc}"
-: "${CXX:=loongarch64-linux-gnu-g++}"
 : "${GOPROXY:=https://mirrors.aliyun.com/goproxy/,direct}"
 : "${NPM_REGISTRY:=https://registry.npmmirror.com}"
 : "${ELECTRON_VERSION:=43.7.7}"
 : "${ELECTRON_DIST:?请设置 ELECTRON_DIST 为解压后的 electron-loong64 运行时目录}"
 
-export GOOS=linux GOARCH=loong64 CGO_ENABLED=1 CC CXX GOPROXY GOSUMDB=off GOFLAGS=-mod=mod
+export CGO_ENABLED=1 GOPROXY GOSUMDB=off GOFLAGS=-mod=mod
 
 # 内核：cgo（sqlcipher + fts5），静态 PIE
 mkdir -p app/kernel-linux

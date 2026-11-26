@@ -1,10 +1,10 @@
-# SiYuan LoongArch64 构建
+# SiYuan LoongArch64 原生构建
 
-交叉编译 LoongArch64 版 SiYuan 桌面端（Go 内核 + 前端 + Electron 打包）。
+在 LoongArch64 上原生编译 SiYuan 桌面端（Go 内核 + 前端 + Electron 打包）。
 
 ## 依赖
 
-- 系统包：`go`、`nodejs`、`pnpm`、`loongarch64-linux-gnu-gcc/g++`、`ar`、`tar`
+- 系统包：`go`、`nodejs`、`pnpm`、`gcc`/`g++`、`ar`、`tar`
 - 网络：
   - Electron loong64 运行时：`darkyzhou/electron-loong64` 的 `v43.7.7` 产物，解压后目录通过 `ELECTRON_DIST` 指定
   - Go 模块与 npm 依赖：脚本默认走国内镜像，可用 `GOPROXY`、`NPM_REGISTRY` 覆盖
@@ -25,7 +25,7 @@ scripts/loong64/package.sh   # deb + tar.gz
 
 ## 说明
 
-- 内核使用 cgo 交叉编译（`fts5 sqlcipher`，静态 PIE）。
+- 内核使用本机 cgo 编译（`fts5 sqlcipher`，静态 PIE）。
 - `go-ole` 缺少 loong64 支持，补丁版本放在 `third_party/go-ole`，经 `kernel/go.mod` 的相对 replace 引入。
 - 上游未提供 loong64 的 OCR 运行时与 pandoc，打包时通过 `LOONG64_SKIP_OCR`、`LOONG64_SKIP_PANDOC` 跳过，OCR 与依赖 pandoc 的导出功能不可用。
 - Electron 使用 43.7.7（loong64 当前可用版本），低于上游声明的 44.x。
