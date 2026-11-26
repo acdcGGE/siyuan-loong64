@@ -56,3 +56,6 @@ muslbin/
 /.cache/ocr/
 /app/stage/ocr/models/
 /app/stage/ocr/runtime/
+
+# loong64 构建产物（由 scripts/loong64/pandoc.sh 生成）
+/app/pandoc/pandoc-linux-loong64.zip

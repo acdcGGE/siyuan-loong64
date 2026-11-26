@@ -15,11 +15,15 @@ mkdir -p app/kernel-linux
 (cd kernel && go build -p "$(nproc)" -buildmode=pie -tags "fts5 sqlcipher" \
   -o ../app/kernel-linux/SiYuan-Kernel -ldflags "-s -w -extldflags -static-pie" .)
 
+# OCR 与 pandoc 资源
+scripts/loong64/ocr.sh
+scripts/loong64/pandoc.sh
+
 # 前端与 electron 打包目录
 cd app
 ELECTRON_SKIP_BINARY_DOWNLOAD=1 npm_config_registry="$NPM_REGISTRY" pnpm install --no-frozen-lockfile
 npm_config_registry="$NPM_REGISTRY" pnpm run build
-LOONG64_SKIP_OCR=1 LOONG64_SKIP_PANDOC=1 npm_config_registry="$NPM_REGISTRY" \
+LOONG64_SKIP_OCR=1 npm_config_registry="$NPM_REGISTRY" \
   pnpm exec electron-builder --linux dir --x64 --config electron-builder-linux.yml \
   -c.electronDist="$ELECTRON_DIST" -c.electronVersion="$ELECTRON_VERSION" \
   -c.npmRebuild=false --publish never

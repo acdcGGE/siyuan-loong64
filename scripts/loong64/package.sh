@@ -11,7 +11,6 @@ ICON_DIR=app/src/assets/icon
 
 [ -d "$UNPACKED" ] || { echo "缺少 $UNPACKED，请先运行 build.sh"; exit 1; }
 
-rm -f "$UNPACKED/resources/pandoc.zip"
 rm -rf "$OUT/siyuan-$VERSION-linux-loong64.tar.gz" "$OUT/siyuan_${VERSION}_loong64.deb" "$PKGDIR"
 tar -czf "$OUT/siyuan-$VERSION-linux-loong64.tar.gz" -C "$UNPACKED" .
 
