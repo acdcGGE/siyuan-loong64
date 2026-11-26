@@ -19,6 +19,7 @@ scripts/loong64/ocr.sh       # OCR 运行时 + worker + 模型
 scripts/loong64/pandoc.sh    # pandoc-linux-loong64.zip
 scripts/loong64/build.sh     # 内核 + 前端 + linux-unpacked
 scripts/loong64/package.sh   # deb + tar.gz
+scripts/loong64/pkg.sh       # Arch Linux 包（需 makepkg）
 ```
 
 `build.sh` 会自动调用 `ocr.sh` 与 `pandoc.sh`，单独执行便于排查资源问题。
@@ -28,6 +29,7 @@ scripts/loong64/package.sh   # deb + tar.gz
 - `app/build/linux-unpacked/`
 - `app/build/siyuan-<version>-linux-loong64.tar.gz`
 - `app/build/siyuan_<version>_loong64.deb`
+- `app/build/siyuan-<version>-<rel>-loong64.pkg.tar.zst`
 
 ## 说明
 
